@@ -96,19 +96,9 @@
             android:ems="10"
             android:inputType="time" />
 
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="match_parent"
-            android:layout_height="76dp"
-            android:text="Rate our Application"
-            android:textAlignment="center"
-            android:textColor="#E15E5E"
-            android:textSize="30dp" />
 
-        <RatingBar
-            android:id="@+id/ratingBar2"
-            android:layout_width="wrap_content"
-            android:layout_height="92dp" />
+
+
 
     </LinearLayout>
 

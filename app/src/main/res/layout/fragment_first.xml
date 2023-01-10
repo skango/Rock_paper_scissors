@@ -53,17 +53,7 @@
             android:inputType="textPassword"
             android:textColorHint="@color/black" />
 
-        <RadioButton
-            android:id="@+id/radioButton"
-            android:layout_width="158dp"
-            android:layout_height="72dp"
-            android:text="Male" />
 
-        <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="157dp"
-            android:layout_height="78dp"
-            android:text="Female" />
 
         <Button
             android:id="@+id/button"

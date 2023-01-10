@@ -1,4 +1,4 @@
-package com.example.rock_paper_scissors
+package com.example.myapplication
 
 import org.junit.Test
 

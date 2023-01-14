@@ -21,6 +21,53 @@ class SecondFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+
+    enum class Choice {
+        Rock, Paper, Scissors;
+    }
+
+
+    fun getUserChoice(choice: Int): Choice {
+        while (true) {
+            println("Please enter one of the following:")
+            for ((index, item) in Choice.values().withIndex()) {
+                println("${index + 1} . $item")
+            }
+            val userInput = readLine().toString()
+            println("You have chosen $userInput")
+            try {
+                return Choice.valueOf(userInput)
+            } catch (e: IllegalArgumentException) {
+                println("Please enter a valid choice")
+            }
+        }
+    }
+
+
+    fun getComputerChoice(): Choice {
+        val randomNumber = (0..2).random()
+        return Choice.values()[randomNumber]
+    }
+
+
+    fun printResult(gameChoice: Choice, userChoice: Choice) {
+        println("I have chosen $gameChoice")
+        when {
+            userChoice == gameChoice -> println("It is a draw")
+            (userChoice == Choice.Rock && gameChoice == Choice.Scissors) ||
+                    (userChoice == Choice.Scissors && gameChoice == Choice.Paper) ||
+                    (userChoice == Choice.Paper && gameChoice == Choice.Rock) -> println("You win!!")
+            else -> println("I win!!")
+        }
+    }
+
+
+    fun main() {
+        //val gameChoice = getComputerChoice()
+       // val userChoice = getUserChoice()
+        //printResult(gameChoice, userChoice)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {

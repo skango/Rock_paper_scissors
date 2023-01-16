@@ -54,13 +54,18 @@
             android:textColorHint="@color/black" />
 
 
-
         <Button
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="71dp"
             android:backgroundTint="#56b507"
-            android:text="Submit"></Button>
+            android:text="Register"></Button>
+
+        <Button
+            android:id="@+id/loginbtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Already registered? Login" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

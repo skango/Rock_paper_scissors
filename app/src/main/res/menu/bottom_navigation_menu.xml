@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Sign in"
+        android:icon="@drawable/ic_baseline_app_registration_24"
+        android:id="@+id/firstFragment"/>
+    <item android:title="Game"
+        android:icon="@drawable/ic_baseline_games_24"
+        android:id="@+id/secondFragment"/>
+    <item android:title="Statistic"
+        android:icon="@drawable/ic_baseline_bar_chart_24"
+        android:id="@+id/thirdFragment"/>
+</menu>

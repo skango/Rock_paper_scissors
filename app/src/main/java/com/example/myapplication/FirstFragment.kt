@@ -59,6 +59,7 @@ class FirstFragment : Fragment() {
                     auth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
+                                baseData.isLoggedIn = true
                                 // Sign in success, update UI with the signed-in user's information
                                /* var id = auth.currentUser?.uid;
                                 var username =
@@ -70,16 +71,16 @@ class FirstFragment : Fragment() {
                                         .setValue(username.toString())
                                 }
 */
-
+                                Toast.makeText(context, "You are logged in!", Toast.LENGTH_SHORT).show()
                                 //Log.d("FirstFragment", "signInWithEmail:success")
-                                val secondFragment = SecondFragment()
+                                /*val secondFragment = SecondFragment()
                                 val fragmentTransaction =
                                     requireActivity().supportFragmentManager.beginTransaction()
                                 fragmentTransaction.replace(
                                     R.id.fragmentContainerView,
                                     secondFragment
                                 )
-                                fragmentTransaction.commit()
+                                fragmentTransaction.commit()*/
                             } else {
                                 // If sign in fails, display a message to the user.
                                 //Log.w("FirstFragment", "signInWithEmail:failure", task.exception)
@@ -114,6 +115,7 @@ class FirstFragment : Fragment() {
                         auth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
+                                    baseData.isLoggedIn = true
                                     // Sign in success, update UI with the signed-in user's information
                                     var id = auth.currentUser?.uid;
                                     var username =
@@ -125,16 +127,16 @@ class FirstFragment : Fragment() {
                                             .setValue(username.toString())
                                     }
 
-
+                                    Toast.makeText(context, "You are logged in!", Toast.LENGTH_SHORT).show()
                                     //Log.d("FirstFragment", "signInWithEmail:success")
-                                    val secondFragment = SecondFragment()
+                                   /* val secondFragment = SecondFragment()
                                     val fragmentTransaction =
                                         requireActivity().supportFragmentManager.beginTransaction()
                                     fragmentTransaction.replace(
                                         R.id.fragmentContainerView,
                                         secondFragment
                                     )
-                                    fragmentTransaction.commit()
+                                    fragmentTransaction.commit()*/
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     //Log.w("FirstFragment", "signInWithEmail:failure", task.exception)

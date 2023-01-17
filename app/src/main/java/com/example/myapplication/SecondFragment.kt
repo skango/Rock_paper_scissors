@@ -1,10 +1,14 @@
 package com.example.myapplication
 
+import android.media.Image
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +25,8 @@ class SecondFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    var playerchoice: Choice? = null
+    var botchoice: Choice? = null
 
     enum class Choice {
         Rock, Paper, Scissors;
@@ -50,14 +56,14 @@ class SecondFragment : Fragment() {
     }
 
 
-    fun printResult(gameChoice: Choice, userChoice: Choice) {
+    fun printResult(gameChoice: Choice, userChoice: Choice) : String{
         println("I have chosen $gameChoice")
         when {
-            userChoice == gameChoice -> println("It is a draw")
+            userChoice == gameChoice -> return  ("Draw")
             (userChoice == Choice.Rock && gameChoice == Choice.Scissors) ||
                     (userChoice == Choice.Scissors && gameChoice == Choice.Paper) ||
-                    (userChoice == Choice.Paper && gameChoice == Choice.Rock) -> println("You win!!")
-            else -> println("I win!!")
+                    (userChoice == Choice.Paper && gameChoice == Choice.Rock) -> return ("You Loose!")
+            else -> return "You Win"
         }
     }
 
@@ -74,6 +80,8 @@ class SecondFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+
     }
 
     override fun onCreateView(
@@ -81,7 +89,65 @@ class SecondFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
+
+
         return inflater.inflate(R.layout.fragment_second, container, false)
+    }
+
+    fun ComputerMove() {
+        var compchoice = getComputerChoice()
+        botchoice = compchoice
+        view?.findViewById<ImageView>(R.id.imageView5)?.visibility = View.VISIBLE
+        when (compchoice) {
+            Choice.Rock -> view?.findViewById<ImageView>(R.id.imageView5)?.setImageResource(R.drawable.rock)
+            Choice.Paper -> view?.findViewById<ImageView>(R.id.imageView5)?.setImageResource(R.drawable.paper)
+            Choice.Scissors -> view?.findViewById<ImageView>(R.id.imageView5)?.setImageResource(R.drawable.scissors)
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (!baseData.isLoggedIn!!)
+        {
+            Toast.makeText(context, "You are not logged in!", Toast.LENGTH_SHORT).show()
+        }
+        view?.findViewById<ImageView>(R.id.imageView4)?.visibility  = View.GONE
+        view?.findViewById<ImageView>(R.id.imageView5)?.visibility  = View.GONE
+        view?.findViewById<TextView>(R.id.textView3)?.text  = "Start The game"
+
+        view?.findViewById<ImageView>(R.id.imageView)?.setOnClickListener {
+            if (baseData.isLoggedIn!!) {
+                playerchoice = Choice.Rock
+                view?.findViewById<ImageView>(R.id.imageView4)?.visibility = View.VISIBLE
+                view?.findViewById<ImageView>(R.id.imageView4)?.setImageResource(R.drawable.rock)
+                ComputerMove()
+                var status = botchoice?.let { it1 -> printResult(playerchoice!!, it1) }
+                view?.findViewById<TextView>(R.id.textView3)?.text  = status
+            }
+        }
+
+        view?.findViewById<ImageView>(R.id.imageView2)?.setOnClickListener {
+            if (baseData.isLoggedIn!!) {
+                playerchoice = Choice.Paper
+                view?.findViewById<ImageView>(R.id.imageView4)?.visibility = View.VISIBLE
+                view?.findViewById<ImageView>(R.id.imageView4)?.setImageResource(R.drawable.paper)
+                ComputerMove()
+                var status = botchoice?.let { it1 -> printResult(playerchoice!!, it1) }
+                view?.findViewById<TextView>(R.id.textView3)?.text  = status
+            }
+        }
+        view?.findViewById<ImageView>(R.id.imageView3)?.setOnClickListener {
+            if (baseData.isLoggedIn!!) {
+                playerchoice = Choice.Scissors
+                view?.findViewById<ImageView>(R.id.imageView4)?.visibility = View.VISIBLE
+                view?.findViewById<ImageView>(R.id.imageView4)
+                    ?.setImageResource(R.drawable.scissors)
+                ComputerMove()
+                var status = botchoice?.let { it1 -> printResult(playerchoice!!, it1) }
+                view?.findViewById<TextView>(R.id.textView3)?.text  = status
+            }
+        }
     }
 
     companion object {

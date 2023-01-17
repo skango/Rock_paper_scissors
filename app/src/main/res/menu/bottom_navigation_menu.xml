@@ -8,7 +8,8 @@
     <item android:title="Game"
         android:icon="@drawable/ic_baseline_games_24"
         android:id="@+id/secondFragment"/>
-    <item android:title="Statistic"
-        android:icon="@drawable/ic_baseline_bar_chart_24"
-        android:id="@+id/thirdFragment"/>
+    <item
+        android:id="@+id/thirdFragment"
+        android:icon="@drawable/ic_baseline_short_text_24"
+        android:title="Credits" />
 </menu>

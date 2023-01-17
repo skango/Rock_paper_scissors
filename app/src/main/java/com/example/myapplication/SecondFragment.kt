@@ -9,6 +9,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,6 +31,8 @@ class SecondFragment : Fragment() {
 
     var playerchoice: Choice? = null
     var botchoice: Choice? = null
+    var name = "You"
+    private lateinit var database: DatabaseReference
 
     enum class Choice {
         Rock, Paper, Scissors;
@@ -62,8 +68,8 @@ class SecondFragment : Fragment() {
             userChoice == gameChoice -> return  ("Draw")
             (userChoice == Choice.Rock && gameChoice == Choice.Scissors) ||
                     (userChoice == Choice.Scissors && gameChoice == Choice.Paper) ||
-                    (userChoice == Choice.Paper && gameChoice == Choice.Rock) -> return ("You Loose!")
-            else -> return "You Win"
+                    (userChoice == Choice.Paper && gameChoice == Choice.Rock) -> return (name + " Lost!")
+            else -> return (name + " Won")
         }
     }
 
@@ -108,6 +114,7 @@ class SecondFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
         if (!baseData.isLoggedIn!!)
         {
             Toast.makeText(context, "You are not logged in!", Toast.LENGTH_SHORT).show()
@@ -146,6 +153,15 @@ class SecondFragment : Fragment() {
                 ComputerMove()
                 var status = botchoice?.let { it1 -> printResult(playerchoice!!, it1) }
                 view?.findViewById<TextView>(R.id.textView3)?.text  = status
+            }
+        }
+        var auth = FirebaseAuth.getInstance()
+        database = Firebase.database.reference
+        auth.currentUser?.let {
+            database.child(it.uid).child("name").get().addOnSuccessListener {
+                name = it.value as String
+            }.addOnFailureListener{
+
             }
         }
     }
